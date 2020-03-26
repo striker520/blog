@@ -1,0 +1,77 @@
+server:
+      port: 8080
+
+spring:
+  datasource:
+
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fkzm_blog?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: ysh2b123
+
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+
+
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: utf-8
+    cache: false
+
+
+
+  devtools:
+    add-properties: false
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location:  classpath:mybatis.xml
+  type-aliases-package: com.fkzm.blog.entities
+
+
+
+
+
+logging:
+  level:
+    web: info
+    com:
+      fkzm:
+        blog:
+          mapper:
+            debug
+
+
+  file:
+    path: /Users/dejavu/Documents/Log/MyBlog
+    clean-history-on-start: on
+    max-history: 10
+    name: myblog.log
+    max-size: 20MB
+  pattern:
+    dateformat: yy/MM/dd hh:MM:ss
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true

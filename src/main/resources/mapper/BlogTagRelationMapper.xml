@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fkzm.blog.mapper.BlogTagRelationMapper">
+    <insert id="setRelations">
+
+        insert into blog_tag (blog_id, tag_id) values
+        <foreach collection="tagList" item="tag" index="index" separator=",">
+            (#{blogId},#{tag.id})
+        </foreach>
+    </insert>
+    <insert id="setRelation">
+        insert into blog_tag (blog_id, tag_id) values (#{param1},#{param2})
+    </insert>
+
+
+    <delete id="deleteRelations">
+        delete from blog_tag where blog_id = #{key}
+    </delete>
+    <delete id="deleteRelation">
+        delete from blog_tag where blog_id = #{param1} and tag_id = #{param2}
+    </delete>
+    <select id="getBlogsByTags" resultMap="com.fkzm.blog.mapper.BlogMapper.blogResultMap">
+        select * from blog where id in (select blog_id from blog_tag where tag_id in 
+            <foreach collection="list" item="tag" index="index" open="(" close=")" separator=",">
+                #{tag.id}
+            </foreach>
+            )
+    </select>
+    <resultMap id="relationCount" type="com.fkzm.blog.entities.TagToBlogCount">
+        <result column="tag_id" property="tagId"/>
+        <result column="count(*)" property="blogCount"/>
+        <result column="name" property="tagName"/>
+    </resultMap>
+    <select id="getTagIds" resultType="java.lang.Long">
+        select tag_id from blog_tag where blog_id = #{id}
+    </select>
+    <select id="getRelations" resultMap="relationCount">
+        select tag_id ,t.name,count(*) from blog_tag inner join tag t on blog_tag.tag_id = t.id group by tag_id
+    </select>
+</mapper>

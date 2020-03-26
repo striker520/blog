@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fkzm.blog.mapper.BlogTypeMapper">
+    <insert id="save" keyProperty="id" useGeneratedKeys="true">
+        insert into blog_type (name) values(#{blogType.name})
+    </insert>
+    <update id="update">
+        update blog_type set name = #{blogType.name} where id =#{blogType.id}
+    </update>
+    <delete id="delete">
+        delete from blog_type where id = #{id}
+    </delete>
+    <select id="getByList" resultType="com.fkzm.blog.entities.BlogType">
+        select * from blog_type
+    </select>
+    <select id="get" resultType="com.fkzm.blog.entities.BlogType">
+        select * from blog_type where id = #{id}
+    </select>
+    <select id="getByName" resultType="com.fkzm.blog.entities.BlogType">
+        select * from blog_type where name = #{type.name}
+    </select>
+    <resultMap id="typeToBlogs" type="com.fkzm.blog.entities.TypeToBlogs">
+        <result column="id" property="typeId"/>
+        <result column="name" property="typeName"/>
+        <result column="count(*)" property="blogCount"/>
+    </resultMap>
+    <select id="getEveryTypesBlogCount" resultMap="typeToBlogs">
+        select blog_type.id ,blog_type.name,count(*) from blog_type inner join blog b on blog_type.id = b.type_id group by blog_type.id
+    </select>
+</mapper>

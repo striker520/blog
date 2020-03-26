@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索结果</title>
+    <link rel="stylesheet" href="../static/css/semantic.min.css" th:replace="_fragments::_semanticC">
+    <link rel="stylesheet" type="text/css" href="../static/css/me.css" th:replace="_fragments::_meC">
+    <link rel="stylesheet" type="text/css" href="../static/css/animate.min.css" th:replace="_fragments::_animateC">
+
+</head>
+<body class="m-body-pattern animated fadeInDown">
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini m-shadow-small" th:replace="_fragments::menu(1)">
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">FKZM</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="large home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i> 标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="folder open icon"></i> 归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我 </a>
+            <div class="right item">
+                <div class="ui icon  input">
+                    <input type="text" placeholder="Search...">
+                    <i class="circular teal inverted search link icon"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn" href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+
+<div class="m-container-small m-padded-tb-large">
+    <div class="container">
+        <!--header-->
+
+
+        <div class="ui segments">
+            <div class="ui secondary segment">
+                <div class="ui two column grid">
+                    <div class="column">
+                        <i class="tags icon"></i>搜索结果
+                    </div>
+                    <div class="right aligned column">
+                        <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogPageInfo.total}">14</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        底部文章-->
+
+
+
+            <!--context-->
+            <div class="ui attached teal segment">
+                <div class="ui padded vertical segment m-padded-tb-large" th:each="blogItem:${blogPageInfo.getList()}" th:if="${blogPageInfo.getList().size()>0}">
+                    <div class="ui mobile reversed stackable grid">
+                        <div class="eleven wide column">
+                            <h3 class="ui  center aligned header" th:text="${blogItem.title}">初识JavaEE</h3>
+                            <p ${#strings.substring(blogItem.content,0,100)}>这个系列是为了记录学习Java
+                                EE的轨迹，也算是读书笔记，是我先看完了一遍教程对相关概念有了一个大体印象以后准备再重头细看一遍时同步写的博客。感想就是其实以前课堂上老师教的课都是很有作用的，如果你能很好地掌握设计模式、计算机网络的相关知识，那么对你理解Java
+                                EE会有很大的帮助。可能是大三才有了以后要找工作的实感，似乎慢慢知道自己该学些什么，不像大一大二想努力的时候还是很迷茫找不到方向。其实现在也常常否定自己，觉得自己醒悟的太晚，大三了代码能力还是很差。但是也会觉得其实生活也待我不薄，也会有很多小确信，比如看到博客浏览量每天都在增加，看到陌生的人因为我的博客关注我······上面都是题外话啦，我们开始吧！
+                            </p>
+                            <div class="ui stackable grid">
+                                <div class="row">
+                                    <div class="eleven wide column">
+                                        <div class="ui horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/100" alt="" class="ui avatar image">
+                                                <div class="content"><a class="header" th:text="${blogItem.user.nickname}">FKZM</a></div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar alternate outline icon"></i>[[${blogItem.updateTime!=null}?${#dates.format(blogItem.updateTime,'yyyy-MM-dd')}]]
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>[[${blogItem.pageViews}]]
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class=" right aligned five wide column"><a href="#"
+                                                                                    class="ui teal basic label m-padded-tb-mini m-text-thin"
+                                                                                    target="_blank" th:text="${blogItem.blogType.name}">认知升级</a></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="five wide column">
+                            <a href="#" target="_blank"><img class="ui rounded image"
+                                                             src="https://picsum.photos/200" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!--footer-->
+            <div class="ui bottom attached segment" th:if="${blogPageInfo.pageSize>1}">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <a class="ui teal mini basic button" th:href="@{/page/pageNo(pageNo=${blogPageInfo.prePage})}" th:unless="${blogPageInfo.isFirstPage}">上一页</a>
+                    </div>
+                    <div class="column right aligned">
+                        <a class="ui teal mini basic button" th:href="@{/page/pageNo(pageNo=${blogPageInfo.nextPage})}" th:unless="${blogPageInfo.isLastPage}">下一页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<footer class="ui inverted vertical segment m-padded-tb-massive" th:replace="_fragments::footer">
+    <div class="ui container">
+        <div class="ui inverted center aligned divided grid stackable">
+            <div class="three wide column">
+                <img src="../static/images/WechatIMG1.jpeg" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class=" item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header  m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item ">Email:conquermeee@icloud.com</a>
+                    <a href="#" class="item ">QQ: 534814599</a>
+
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header ">About</h4>
+                <p class="m-opacity-mini m-text-lined m-text-spaced ">这是我的个人博客,会分享关于编程的技术思考,希望能给来到这里的你带来帮助</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p align="center" class="m-text-spaced m-opacity-mini">Copyright © 2019-2020 Zhaogaopeng Designed by FKZM</p>
+</footer>
+
+
+<script src="../static/js/jquery-3.4.1.min.js" th:replace="_fragments::_jqueryJ"></script>
+<script src="../static/js/semantic.min.js" th:replace="_fragments::_semanticJ"></script>
+<script>
+    $("#hide-show-btn").click(function () {
+        /*切换显示隐藏*/
+        $(".m-item").toggleClass("m-mobile-hide");
+    });
+</script>
+</body>
+</html>
+
+
+
+
+</body>

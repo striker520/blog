@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/semantic.min.css" th:replace="~{admin/_fragments::_semanticC}">
+    <link rel="stylesheet" type="text/css" href="css/me.css" th:replace="~{admin/_fragments::_meC}">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css" th:replace="~{admin/_fragments::_animateC}">
+
+</head>
+<body class="m-body-pattern">
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini m-shadow-small" th:replace="~{admin/_fragments::nav(3)}">
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">后台管理</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="large home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="keyboard icon"></i>编辑</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="sitemap icon"></i>类型</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags open icon"></i> 标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="comments icon"></i>评论</a>
+            <div class="right menu m-mobile-hide">
+                <div class="ui item dropdown">
+                    <div class="text">
+                        <img src="https://picsum.photos/100" alt="" class="ui avatar image">FKZM
+                    </div>
+                    <i class="dropdown icon olive"></i>
+                    <div class="rounded menu">
+                        <a href="#" class="ui rounded button fluid " th:href="@{/admin/logout}">注销</a>
+                        <a href="#" class="ui rounded button  fluid " th:href="@{/druid}">Druid </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn" href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+
+
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" class=" active teal item">发布</a>
+            <a href="#" th:href="@{/admin/getPage/1/5}" class=" item">列表</a>
+        </div>
+    </div>
+</div>
+<!--编辑-->
+<div class="m-container-small m-padded-tb-big">
+
+    <div class="ui container">
+        <div class="ui success message " th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示:</div>
+            <p th:text="${message}">恭喜操作成功</p>
+        </div>
+        <form id="m-form-1 ui form" action="#" th:action="@{/admin/saveBlogType}" method="post" class="ui form">
+            <div class=" required field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">名称</label>
+                    <input type="text" name="name" placeholder="分类名称">
+                </div>
+            </div>
+
+
+            <!--buttons-->
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                <button type="submit" class="ui olive  button">提交</button>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--footer-->
+<div th:replace="admin/_fragments::footer"></div>
+
+</body>
+
+<script src="../../static/js/jquery-3.4.1.min.js" th:replace="~{admin/_fragments::_jqueryJ}"></script>
+<script src="../../static/js/semantic.min.js" th:replace="~{admin/_fragments::_semanticJ}"></script>
+
+<script>
+    $("#hide-show-btn").click(function () {
+        /*切换显示隐藏*/
+        $(".m-item").toggleClass("m-mobile-hide");
+    });
+    $(".ui.dropdown").dropdown({
+        on: "hover"
+    });
+
+    $(".close.icon").click(function () {
+        $(this).parent().remove();
+    });
+
+    $(".ui.form").form({
+            title: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'can be empty on name',
+                }]
+            }
+        }
+    );
+</script>
+</html>

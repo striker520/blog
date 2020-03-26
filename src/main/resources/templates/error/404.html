@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客</title>
+    <link rel="stylesheet" href="css/semantic.min.css" th:replace="_fragments::_semanticC">
+    <link rel="stylesheet" type="text/css" href="css/me.css" th:replace="_fragments::_meC">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css" th:replace="_fragments::_animateC">
+
+</head>
+
+<body class="m-body-pattern animated fadeInDown">
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini m-shadow-small" >
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">FKZM</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="large home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i> 标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="folder open icon"></i> 归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我 </a>
+            <div class="right item">
+                <div class="ui icon  input">
+                    <input type="text" placeholder="Search...">
+                    <i class="circular teal inverted search link icon"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn"href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+        <div class="ui small container m-padding-tb-massive">
+            <div class="ui error message m-padding-tb-massive">
+                <div class="ui container">
+                    <div class="ui icon">
+                        <i class="huge frown outline red icon"></i>
+                    </div>
+                    <h2>404</h2>
+                    <p>对不起你访问的资源不存在</p>
+                </div>
+
+            </div>
+
+        </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="ui inverted vertical segment m-padded-tb-massive" th:replace="~{_fragments::footer}">
+    <div class="ui container">
+        <div class="ui inverted center aligned divided grid stackable">
+            <div class="three wide column">
+                <img src="images/WechatIMG1.jpeg" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class=" item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header  m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item ">Email:conquermeee@icloud.com</a>
+                    <a href="#" class="item ">QQ: 534814599</a>
+
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header ">About</h4>
+                <p class="m-opacity-mini m-text-lined m-text-spaced ">这是我的个人博客,会分享关于编程的技术思考,希望能给来到这里的你带来帮助</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p align="center" class="m-text-spaced m-opacity-mini">Copyright © 2019-2020 Zhaogaopeng Designed by FKZM</p>
+</footer>
+</body>
+</html>

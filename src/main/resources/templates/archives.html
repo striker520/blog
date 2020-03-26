@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/me.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+
+</head>
+<body class="m-body-pattern animated fadeIn">
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">FKZM</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="large home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i> 标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="folder open icon"></i> 归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我 </a>
+            <div class="right item">
+                <div class="ui icon  input">
+                    <input type="text" placeholder="Search...">
+                    <i class="circular teal inverted search link icon"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn" href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+<!--        分类-->
+<div class="m-container-small m-padded-tb-large">
+    <div class="container">
+        <!--header-->
+        <div class="ui top attached segment">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <h3 class="ui teal header">归档</h3>
+                </div>
+                <div class="right aligned column m-text-fat">
+                    共<h2 class="ui orange header m-inline-block m-text-thin">14</h2>篇
+                </div>
+            </div>
+        </div>
+        <!--归档-->
+        <h2 class="ui header center aligned">2017</h2>
+        <div class="ui fluid vertical menu">
+            <a href="#" class="item" target="_blank">
+                <span><i class="mini olive circle icon"></i>
+                关于刻意练习的清单
+                <div class="ui teal basic left pointing label">12月7日</div></span>
+                <div class="ui basic green label">原创</div>
+
+            </a>
+            <a href="#" class="item" target="_blank">
+                <span><i class="mini olive circle icon"></i>
+                关于刻意练习的清单
+                <div class="ui teal basic left pointing label">12月7日</div></span>
+                <div class="ui basic blue label">转载</div>
+
+            </a>
+            <a href="#" class="item" target="_blank">
+                <span><i class="mini olive circle icon"></i>
+                关于刻意练习的清单
+                <div class="ui teal basic left pointing label">12月7日</div></span>
+                <div class="ui basic  pink label">翻译</div>
+
+            </a>
+
+        </div>
+        <h2 class="ui header center aligned">2018</h2>
+        <div class="ui fluid vertical menu">
+            <a href="#" class="item" target="_blank">
+                <span><i class="mini olive circle icon"></i>
+                关于刻意练习的清单
+                <div class="ui teal basic left pointing label">12月7日</div></span>
+                <div class="ui basic green label">原创</div>
+
+            </a>
+            <a href="#" class="item" target="_blank">
+                <span><i class="mini olive circle icon"></i>
+                关于刻意练习的清单
+                <div class="ui teal basic left pointing label">12月7日</div></span>
+                <div class="ui basic blue label">转载</div>
+
+            </a>
+            <a href="#" class="item" target="_blank">
+                <span><i class="mini olive circle icon"></i>
+                关于刻意练习的清单
+                <div class="ui teal basic left pointing label">12月7日</div></span>
+                <div class="ui basic  pink label">翻译</div>
+
+            </a>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<!--footer-->
+<footer class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui container">
+        <div class="ui inverted center aligned divided grid stackable">
+            <div class="three wide column">
+                <img src="../static/images/WechatIMG1.jpeg" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class=" item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header  m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item ">Email:conquermeee@icloud.com</a>
+                    <a href="#" class="item ">QQ: 534814599</a>
+
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header ">About</h4>
+                <p class="m-opacity-mini m-text-lined m-text-spaced ">这是我的个人博客,会分享关于编程的技术思考,希望能给来到这里的你带来帮助</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p align="center" class="m-text-spaced m-opacity-mini">Copyright © 2019-2020 Zhaogaopeng Designed by FKZM</p>
+</footer>
+
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/semantic.min.js"></script>
+<script>
+    $("#hide-show-btn").click(function () {
+        /*切换显示隐藏*/
+        $(".m-item").toggleClass("m-mobile-hide");
+    });
+
+</script>
+</body>
+</html>

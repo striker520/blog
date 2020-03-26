@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fkzm.blog.mapper.BlogMapper">
+    <insert id="save" useGeneratedKeys="true">
+        <selectKey keyProperty="blog.id" order="AFTER" resultType="java.lang.Long">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into blog (title, content, first_picture, flag, page_views, can_praise, can_comment, published,
+        recommend, create_time, update_time, type_id,user_id)
+        values (#{blog.title}, #{blog.content}, #{blog.firstPicture}, #{blog.flag}, #{blog.pageViews},
+        #{blog.canPraise},
+        #{blog.canComment}, #{blog.published}, #{blog.recommend}, #{blog.createTime}, #{blog.updateTime},
+        #{blog.blogType.id},
+        #{blog.user.id}
+        )
+    </insert>
+    <update id="updateArticle">
+        update blog
+        <set>
+            <if test="blog.title != null">title = #{blog.title},</if>
+            <if test="blog.content != null">content = #{blog.content},</if>
+            <if test="blog.firstPicture != null">first_picture = #{blog.firstPicture},</if>
+            <if test="blog.flag != null">flag = #{blog.flag},</if>
+            <if test="blog.canPraise != null">can_praise = #{blog.canPraise},</if>
+            <if test="blog.canComment != null">can_comment = #{blog.canComment},</if>
+            <if test="blog.published != null">published = #{blog.published},</if>
+            <if test="blog.recommend != null">recommend = #{blog.recommend},</if>
+            <if test="blog.updateTime != null">update_time = #{blog.updateTime},</if>
+            <if test="blog.blogType != null and blog.blogType.id != null">type_id = #{blog.blogType.id}</if>
+
+
+        </set>
+        where id = #{blog.id}
+
+    </update>
+    <update id="incViews">
+        update blog set page_views =page_views + 1 where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from blog where id = #{id}
+    </delete>
+    <select id="getById" resultMap="blogResultMap">
+        select b.id as blog_id,
+               b.title as blog_title,
+               b.content as blog_content,
+               b.recommend as blog_recommend,
+               b.update_time as blog_update_time,
+               b.first_picture as blog_first_picture,
+               b.flag as blog_flag,
+               b.page_views as blog_page_views,
+               b.can_praise as blog_can_praise,
+               b.can_comment as blog_can_comment,
+               b.published as blog_publishedm,
+               b.create_time as blog_create_time,
+               b.type_id as blog_type_id,
+               bt.name as blog_type_name,
+               u.id as u_id,
+               u.username as u_username,
+               u.nickname as u_nickname,
+               u.avatar as u_avatar,
+               u.email as u_email,
+               u.create_time as u_create_time,
+               u.password as u_password,
+               u.type as u_type,
+               u.update_time as u_update_timeas
+        from blog b
+                 left outer join blog_type bt on b.type_id = bt.id
+                 left outer join user u on b.user_id =u.id
+        where b.id = #{id}
+    </select>
+    <select id="getByType" resultType="com.fkzm.blog.entities.Blog"></select>
+    <select id="getByTag" resultType="com.fkzm.blog.entities.Blog"></select>
+    <resultMap id="blogResultMap" type="com.fkzm.blog.entities.Blog">
+        <id column="blog_id" property="id"/>
+        <result column="blog_title" property="title"/>
+        <result column="blog_content" property="content"/>
+        <result column="blog_first_picture" property="firstPicture"/>
+        <result column="blog_flag" property="flag"/>
+        <result column="blog_page_views" property="pageViews"/>
+        <result column="blog_can_praise" property="canPraise"/>
+        <result column="blog_can_comment" property="canComment"/>
+        <result column="blog_published" property="published"/>
+        <result column="blog_recommend" property="recommend"/>
+        <result column="blog_create_time" property="createTime"/>
+        <result column="blog_update_time" property="updateTime"/>
+        <association property="blogType" javaType="com.fkzm.blog.entities.BlogType">
+            <id column="blog_type_id" property="id"/>
+            <result column="blog_type_name" property="name"/>
+        </association>
+        <association property="user" javaType="com.fkzm.blog.entities.User">
+            <id column="u_id" property="id"/>
+            <result column="u_username" property="username"/>
+            <result column="u_nickname" property="nickname"/>
+            <result column="u_avatar" property="avatar"/>
+            <result column="u_email" property="email"/>
+            <result column="u_create_time" property="createTime"/>
+            <result column="u_password" property="password"/>
+            <result column="u_type" property="type"/>
+            <result column="u_update_time" property="updateTime"/>
+        </association>
+
+    </resultMap>
+    <select id="getByCriteria" resultMap="blogResultMap">
+        select b.id as blog_id,
+        b.title as blog_title,
+        b.content as blog_content,
+        b.recommend as blog_recommend,
+        b.update_time as blog_update_time,
+        b.first_picture as blog_first_picture,
+        b.flag as blog_flag,
+        b.page_views as blog_page_views,
+        b.can_praise as blog_can_praise,
+        b.can_comment as blog_can_comment,
+        b.published as blog_publishedm,
+        b.create_time as blog_create_time,
+        b.type_id as blog_type_id,
+        bt.name as blog_type_name,
+        u.id as u_id,
+        u.username as u_username,
+        u.nickname as u_nickname,
+        u.avatar as u_avatar,
+        u.email as u_email,
+        u.create_time as u_create_time,
+        u.password as u_password,
+        u.type as u_type,
+        u.update_time as u_update_timeas
+        from blog b
+        left outer join blog_type bt on b.type_id = bt.id
+        left outer join user u on b.user_id =u.id
+        <where>
+            <if test="blog.title != null">
+                title like concat('%',#{blog.title},'%')
+            </if>
+            <if test="blog.blogType != null and blog.blogType.id != null">
+                AND type_id = #{blog.blogType.id}
+            </if>
+            <if test="true">
+                AND recommend =
+                <choose>
+                    <when test="blog.recommend == true">1</when>
+                    <otherwise>0</otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
+    <select id="getAll" resultMap="blogResultMap">
+        select b.id            as blog_id,
+               b.title         as blog_title,
+               b.recommend     as blog_recommend,
+               b.content as blog_content,
+               b.update_time   as blog_update_time,
+               b.type_id       as blog_type_id,
+               b.first_picture as blog_first_picture,
+               bt.name         as blog_type_name,
+               u.id            as u_id,
+               b.flag          as blog_flag,
+               b.page_views    as blog_page_views,
+               b.can_praise    as blog_can_praise,
+               b.can_comment   as blog_can_comment,
+               b.published     as blog_publishedm,
+               b.create_time   as blog_create_time,
+               u.username      as u_username,
+               u.nickname      as u_nickname,
+               u.avatar        as u_avatar,
+               u.email         as u_email,
+               u.create_time   as u_create_time,
+               u.password      as u_password,
+               u.type          as u_type,
+               u.update_time   as u_update_timeas
+        from blog b
+                 left outer join blog_type bt on b.type_id = bt.id
+                 left outer join user u on b.user_id = u.id
+    </select>
+    <select id="getAllPublished" resultMap="blogResultMap">
+        select b.id            as blog_id,
+               b.title         as blog_title,
+               b.content as blog_content,
+               b.recommend     as blog_recommend,
+               b.update_time   as blog_update_time,
+               b.type_id       as blog_type_id,
+               b.first_picture as blog_first_picture,
+               bt.name         as blog_type_name,
+               u.id            as u_id,
+               b.flag          as blog_flag,
+               b.page_views    as blog_page_views,
+               b.can_praise    as blog_can_praise,
+               b.can_comment   as blog_can_comment,
+               b.published     as blog_publishedm,
+               b.create_time   as blog_create_time,
+               u.username      as u_username,
+               u.nickname      as u_nickname,
+               u.avatar        as u_avatar,
+               u.email         as u_email,
+               u.create_time   as u_create_time,
+               u.password      as u_password,
+               u.type          as u_type,
+               u.update_time   as u_update_timeas
+        from blog b
+                 left outer join blog_type bt on b.type_id = bt.id
+                 left outer join user u on b.user_id = u.id
+        where b.published = 1
+    </select>
+    <select id="getSortedPublishedWithLimit" resultType="com.fkzm.blog.entities.Blog">
+        select id,title from blog where recommend = 1 order by update_time desc limit #{maxSize}
+    </select>
+    <select id="getAllByKeyWord" resultMap="blogResultMap">
+        select b.id            as blog_id,
+               b.title         as blog_title,
+               b.content as blog_content,
+               b.recommend     as blog_recommend,
+               b.update_time   as blog_update_time,
+               b.type_id       as blog_type_id,
+               b.first_picture as blog_first_picture,
+               bt.name         as blog_type_name,
+               u.id            as u_id,
+               b.flag          as blog_flag,
+               b.page_views    as blog_page_views,
+               b.can_praise    as blog_can_praise,
+               b.can_comment   as blog_can_comment,
+               b.published     as blog_publishedm,
+               b.create_time   as blog_create_time,
+               u.username      as u_username,
+               u.nickname      as u_nickname,
+               u.avatar        as u_avatar,
+               u.email         as u_email,
+               u.create_time   as u_create_time,
+               u.password      as u_password,
+               u.type          as u_type,
+               u.update_time   as u_update_timeas
+        from blog b
+                 left outer join blog_type bt on b.type_id = bt.id
+                 left outer join user u on b.user_id = u.id
+        where b.title like concat('%',#{keyword},'%') or b.content like concat('%',#{keyword},'%')
+
+    </select>
+
+</mapper>

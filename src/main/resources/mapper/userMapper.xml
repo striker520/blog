@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fkzm.blog.mapper.UserMapper">
+    <insert id="save">
+        insert into user(nickname, username, password, email, avatar, type, create_time, updateTime)
+        values(#{user.nickname},#{user.username},#{user.password},#{user.email},#{user.avatar},#{user.type},#{user.create_time},#{user.updateTime})
+    </insert>
+    <update id="update">
+        update user set email = #{user.email},avatar = #{user.avatar},nickname = #{user.nickName}
+    </update>
+    <delete id="delete">
+        delete  from user where id = #{id}
+    </delete>
+    <select id="get" resultType="com.fkzm.blog.entities.User">
+        select *from user where id = #{id}
+    </select>
+    <select id="findUser" resultType="com.fkzm.blog.entities.User">
+        select * from user where  username = #{username} and password = #{password}
+
+    </select>
+</mapper>

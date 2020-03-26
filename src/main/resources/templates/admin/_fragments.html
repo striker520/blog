@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >欢迎</title>
+    <link rel="stylesheet" href="../static/css/semantic.min.css" th:href="@{/css/semantic.min.css}" th:fragment="_semanticC">
+    <link rel="stylesheet" type="text/css" href="css/me.css" th:href="@{/css/me.css}" th:fragment="_meC">
+    <link rel="stylesheet" type="text/css" href="css/typo.css" th:href="@{/css/typo.css}" th:fragment="_typoC">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css" th:href="@{/css/animate.min.css}" th:fragment="_animateC">
+    <link rel="stylesheet" type="text/css" href="lib/prism/prism.css" th:href="@{/lib/prism/prism.css}" th:fragment="_prismC">
+    <link rel="stylesheet" type="text/css" href="lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}" th:fragment="_tocbotC">
+    <link rel="stylesheet" type="text/css" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}" th:fragment="_editormdC">
+
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini m-shadow-small" th:fragment="nav(n)">
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">后台管理</h2>
+            <a href="#" th:href="@{/admin/login}" class="m-item item m-mobile-hide" th:classappend="${n==1}?'active'"><i class="user secret huge home icon"></i>概览</a>
+            <a href="#" th:href="@{/admin/editBlog/toPage/{pageNo}(pageNo=1)}" class="m-item item m-mobile-hide" th:classappend="${n==2}?'active'"><i class="keyboard icon"></i>文章编辑</a>
+            <a href="#" th:href="@{/admin/getPage/1/5}" class="m-item item m-mobile-hide" th:classappend="${n==3}?'active'"><i class="sitemap icon"></i>类型管理</a>
+            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4}?'active'"><i class="tags open icon"></i> 标签管理</a>
+            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5}?'active'"><i class="comments icon"></i>评论管理</a>
+            <div class="right menu m-mobile-hide">
+                <div class="ui item dropdown">
+                    <div class="text">
+                        <img src="https://picsum.photos/100" alt="" class="ui avatar image">FKZM
+                    </div>
+                    <i class="dropdown icon olive"></i>
+                    <div class="rounded menu">
+                        <a href="#"  th:href="@{/admin/logout}" class="ui rounded button fluid ">注销</a>
+                        <a href="#" th:href="@{/druid}" class="ui rounded button  fluid ">Druid</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn" href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+<div th:fragment="editList" class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <form action="" class="ui segment form">
+            <div class="inline fields">
+                <div class="field"><input type="text" name="title" placeholder="搜索标题"></div>
+                <div class="field">
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="type">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">分类</div>
+                        <div class="menu">
+                            <div class="item" data-value="1">错误日志</div>
+                            <div class="item" data-value="1">开发手册</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="recommend" id="recommend"><label for="recommend"></label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui mini olive basic button">
+                        <i class="search  icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>标题</th>
+                <th>类型</th>
+                <th>推荐</th>
+                <th>更新时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>1</th>
+                <th>练习</th>
+                <th>认知升级</th>
+                <th>是</th>
+                <th>2010/12/12</th>
+                <th>
+                    <a href="" class="ui mini teal button">编辑</a>
+                    <a href="" class="ui mini  red button">删除</a>
+
+                </th>
+
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>练习</th>
+                <th>认知升级</th>
+                <th>是</th>
+                <th>2010/12/12</th>
+                <th>
+                    <a href="" class="ui basic mini teal button">编辑</a>
+                    <a href="" class="ui basic mini  red button">删除</a>
+
+                </th>
+
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>练习</th>
+                <th>认知升级</th>
+                <th>是</th>
+                <th>2010/12/12</th>
+                <th>
+                    <a href="" class="ui basic mini teal button">编辑</a>
+                    <a href="" class="ui basic mini  red button">删除</a>
+
+                </th>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div class="ui mini pagination menu">
+                        <a href="#" class=" item">上一页</a>
+                        <a href="#" class=" item">下一页</a>
+                    </div>
+                    <a href="#" class="ui mini teal right floated basic button">新增</a>
+                </td>
+
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+
+</div>
+
+<!--footer-->
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui container">
+        <div class="ui inverted center aligned divided grid stackable">
+            <div class="three wide column">
+                <img src="images/WechatIMG1.jpeg" class="ui rounded image" alt="" style="width: 100px" th:src="@{/images/WechatIMG1.jpeg}">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class=" item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header  m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item ">Email:conquermeee@icloud.com</a>
+                    <a href="#" class="item ">QQ: 534814599</a>
+
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header ">About</h4>
+                <p class="m-opacity-mini m-text-lined m-text-spaced ">这是我的个人博客,会分享关于编程的技术思考,希望能给来到这里的你带来帮助</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p align="center" class="m-text-spaced m-opacity-mini">Copyright © 2019-2020 Zhaogaopeng Designed by FKZM</p>
+</footer>
+
+</body>
+<script src="js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}" th:fragment="_jqueryJ"></script>
+<script src="js/semantic.min.js" th:src="@{/js/semantic.min.js}" th:fragment="_semanticJ"></script>
+<script src="lib/prism/prism.js" th:src="@{/lib/prism/prism.js}" th:fragment="_prismJ"></script>
+<script src="lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}" th:fragment="_tocbotJ"></script>
+<script src="../../static/lib/editormd/editormd.min.js"  th:src="@{/lib/editormd/editormd.min.js}" th:fragment="_editormdJ"></script>
+
+
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/semantic.min.css" th:replace="_fragments::_semanticC">
+    <link rel="stylesheet" type="text/css" href="../static/css/me.css" th:replace="_fragments::_meC">
+    <link rel="stylesheet" type="text/css" href="../static/css/typo.css" th:replace="_fragments::_typoC">
+    <link rel="stylesheet" type="text/css" href="../static/css/animate.min.css" th:replace="_fragments::_animateC">
+    <link rel="stylesheet" type="text/css" href="../static/lib/prism/prism.css" th:replace="_fragments::_prismC">
+    <link rel="stylesheet" type="text/css" href="../static/lib/tocbot/tocbot.css" th:replace="_fragments::_tocbotC">
+
+</head>
+<body class="m-body-pattern ">
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini" th:replace="~{_fragments::menu(4)}">
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">FKZM</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="large home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i> 标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="folder open icon"></i> 归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我 </a>
+            <div class="right item">
+                <div class="ui icon  input">
+                    <input type="text" placeholder="Search...">
+                    <i class="circular teal inverted search link icon"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn" href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+<!--        blog正文-->
+<div class="ui m-container-small m-padded-tb-big  ">
+    <div class="ui container">
+        <div class="ui top attached segment">
+            <div class="ui horizontal link list">
+                <div class="item">
+                    <img src="https://picsum.photos/100" alt="" th:src="@{${blog.user.avatar}}" class="ui avatar image">
+                    <div class="content"><a class="header" th:text="${blog.user.nickname}">FKZM</a></div>
+                </div>
+                <div class="item">
+                    <i class="calendar alternate outline icon"></i>[[${blog.updateTime!=null}?${#dates.format(blog.updateTime,'yyyy-MM-dd')}]]
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i>[[${blog.pageViews}]]
+                </div>
+
+
+            </div>
+        </div>
+        <div class="ui attached segment">
+            <img src="https://picsum.photos/800/400" alt="" th:src="@{${blog.firstPicture}}" class="ui fluid rounded image">
+        </div>
+        <div class="ui attached segment typo">
+            <div class="ui right aligned basic segment">
+                <div class="ui mini green label">[[${blog.flag}]]</div>
+            </div>
+
+            <h2 class="ui center aligned header" th:text="${blog.title}">怎样在最短时间内掌握一个新技能？如何提高快速学习的能力</h2>
+            <!--在需要高亮的代码块使用下边的标签-->
+            <pre><code class="language-css">Class Person{}</code></pre>
+            <div id="content" class="js-toc-content typo typo-selection content m-padding-lr-responsive" th:utext="${blog.content}">
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--标签-->
+    <div class="ui orange tag label">方法论</div>
+    <!--赞赏 -->
+    <div class="ui very basic center aligned segment">
+        <button class="m-btn1 ui basic circular olive button">赞赏一下</button>
+    </div>
+    <!--二维码-->
+    <div class="ui  flowing popup top left transition hidden m-popup1">
+        <div class="ui orange basic label">
+            <div class=" basic image">
+                <img src="../static/images/51583085794_.pic.jpg" th:src="@{/images/51583085794_.pic.jpg}" alt="" class="ui rounded bordered image"
+                     style="width: 180px">
+            </div>
+        </div>
+    </div>
+    <!--博客信息-->
+    <div class="ui attached  positive message">
+        <div class="ui grid center aligned">
+            <div class="eleven wide column">
+                <ui class="list">
+                    <li>作者:[[${blog.user.nickname}]]<a th:href="@{/about}">联系作者</a></li>
+                    <li>发表时间:[[${blog.updateTime!=null}?${#dates.format(blog.updateTime,'yyyy-MM-dd')}]]</li>
+                    <li>版权声明:自由转载-非商用-非衍生-保持署名(创意共享3.0许可证)</li>
+                    <li>公众号转载: 请在文末添加作者公众号二维码</li>
+                </ui>
+            </div>
+            <div class="five wide column">
+                <img src="../static/images/wx.png" th:src="@{/static/images/wx.png}" alt="" class="ui right floated rounded bordered image"
+                     style="width: 120px">
+            </div>
+        </div>
+    </div>
+    <div id="comments-container" class="ui bottom attached segment">
+        <div class="ui basic seal segment">
+            <div class="ui comments">
+                <h3 class="ui dividing header">评论区</h3>
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="/images/avatar/small/matt.jpg" th:src="@{/images/avatar/small/matt.jpg}">
+                    </a>
+                    <div class="content">
+                        <a class="author">Matt</a>
+                        <div class="metadata">
+                            <span class="date">今天 5:42PM</span>
+                        </div>
+                        <div class="text">初音只是個軟體而已!!</div>
+                        <div class="actions">
+                            <a class="reply">Reply</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="/images/avatar/small/elliot.jpg" th:src="@{/images/avatar/small/elliot.jpg}">
+                    </a>
+                    <div class="content">
+                        <a class="author">蔡依婷</a>
+                        <div class="metadata">
+                            <span class="date">昨天 12:30AM</span>
+                        </div>
+                        <div class="text">
+                            <p>什麼叫初音是個軟體而已... 想決鬥嗎?</p>
+                        </div>
+                        <div class="actions">
+                            <a class="reply">Reply</a>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="/images/avatar/small/jenny.jpg" th:src="@{/images/avatar/small/jenny.jpg}">
+                            </a>
+                            <div class="content">
+                                <a class="author">黃傳欣</a>
+                                <div class="metadata">
+                                    <span class="date">剛剛</span>
+                                </div>
+                                <div class="text">好啦，應該說她 "本來" 是個軟體 :)</div>
+                                <div class="actions">
+                                    <a class="reply">Reply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="/images/avatar/small/joe.jpg" th:src="@{/images/avatar/small/joe.jpg}">
+                    </a>
+                    <div class="content">
+                        <a class="author">何金銀</a>
+                        <div class="metadata">
+                            <span class="date">5 天前</span>
+                        </div>
+                        <div class="text">什麼叫做 "本來" 是個軟體! 你想要決鬥了嗎?</div>
+                        <div class="actions">
+                            <a class="reply">回复</a>
+                        </div>
+                    </div>
+                </div>
+                <form class="ui reply form">
+                    <div class="field">
+                        <textarea name="replyContent" placeholder="输入评论"></textarea>
+                    </div>
+                    <div class="fields">
+                        <div class="field m-mobile-spacing-full m-margin-bottom-mini">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="nickname" placeholder="姓名">
+                            </div>
+                        </div>
+                        <div class="field m-mobile-spacing-full m-margin-bottom-mini">
+                            <div class="ui left icon input">
+                                <i class="mail icon"></i>
+                                <input type="email" name="email" placeholder="邮箱">
+                            </div>
+                        </div>
+                        <div class="field m-mobile-spacing-full m-margin-bottom-mini">
+                            <div class="ui blue labeled submit icon button m-mobile-spacing-full"><i
+                                    class="icon edit"></i> 添加回复
+                            </div>
+                        </div>
+                    </div >
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</div>
+<!--使用绝对布局,固定在侧边-->
+<div class="m-padded-t m-fixed m-right-bottom">
+    <div class="ui vertical icon rounded buttons">
+        <button type="button" class="ui blue button toc-btn1">目录</button>
+        <a href="#comments-container" class="ui olive button">留言区</a>
+        <a href="#" class="ui button yellow"><i class="long arrow alternate up  icon"></i> </a>
+        <a  class="ui  purple button"><img src="../static/images/sina.svg" th:src="@{/static/images/sina.svg}" class="ui fixed rounded image " style="width: 40px;height: 20px"></a>
+
+    </div>
+</div>
+
+<div class="ui toc-container flowing popup top left transition hidden m-popup1" style="width: 250px">
+    <ol class="js-toc"></ol>
+</div>
+<br>
+<br>
+<!--footer-->
+<footer class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui container">
+        <div class="ui inverted center aligned divided grid stackable">
+            <div class="three wide column">
+                <img src="../static/images/WechatIMG1.jpeg" th:src="@{/static/images/WechatIMG1.jpeg}" class="ui rounded image" alt="" style="width: 100px">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class=" item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header  m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item ">Email:conquermeee@icloud.com</a>
+                    <a href="#" class="item ">QQ: 534814599</a>
+
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header ">About</h4>
+                <p class="m-opacity-mini m-text-lined m-text-spaced ">这是我的个人博客,会分享关于编程的技术思考,希望能给来到这里的你带来帮助</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p align="center" class="m-text-spaced m-opacity-mini">Copyright © 2019-2020 Zhaogaopeng Designed by FKZM</p>
+</footer>
+
+
+<script src="../static/js/jquery-3.4.1.min.js" th:replace="_fragments::_jqueryJ"></script>
+<script src="../static/js/semantic.min.js" th:replace="_fragments::_semanticJ"></script>
+<script src="../static/lib/prism/prism.js" th:replace="_fragments::_prismJ"></script>
+<script src="../static/lib/tocbot/tocbot.min.js" th:replace="_fragments::_tocbotJ"></script>
+<script>
+    $("#hide-show-btn").click(function () {
+        /*切换显示隐藏*/
+        $(".m-item").toggleClass("m-mobile-hide");
+    });
+    $(".m-btn1").popup({
+        popup: $(".m-popup1.popup"),
+        on: "click",
+        position: "bottom center"
+    });
+    $(".toc-btn1").popup({
+        popup: $(".toc-container"),
+        on: "click",
+        position: "left center"
+    });
+
+    tocbot.init({
+        tocSelector: '.js-toc',
+        contentSelector: '.js-toc-content',
+        headingSelector: 'h1,h2'
+
+    })
+
+</script>
+</body>
+</html>

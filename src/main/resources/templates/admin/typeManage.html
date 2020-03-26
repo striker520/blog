@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/semantic.min.css" th:replace="~{admin/_fragments::_semanticC}">
+    <link rel="stylesheet" type="text/css" href="css/me.css" th:replace="~{admin/_fragments::_meC}">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css" th:replace="~{admin/_fragments::_animateC}">
+
+</head>
+<body class="m-body-pattern">
+<!--导航-->
+<nav class="ui inverted  attached segment m-padded-tb-mini m-shadow-small" th:replace="~{admin/_fragments::nav(3)}">
+    <div class="ui container">
+        <div class="ui inverted  secondary stackable menu ">
+            <h2 class="ui teal header item">后台管理</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="large home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="keyboard icon"></i>编辑</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="sitemap icon"></i>类型</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags open icon"></i> 标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="comments icon"></i>评论</a>
+            <div class="right menu m-mobile-hide">
+                <div class="ui item dropdown">
+                    <div class="text">
+                        <img src="https://picsum.photos/100" alt="" class="ui avatar image">FKZM
+                    </div>
+                    <i class="dropdown icon olive"></i>
+                    <div class="rounded menu">
+                        <a href="#" class="ui rounded button fluid " th:href="@{/admin/logout}">注销</a>
+                        <a href="#" class="ui rounded button  fluid " th:href="@{/druid}">Druid </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a id="hide-show-btn" href="#" class="ui button black m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+
+    </div>
+</nav>
+
+
+<div class="m-container-small m-padded-tb-big">
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item,itemStat:${pageInfo.getList()}">
+
+            <td th:text="${itemStat.count}">1</td>
+            <td th:text="${item.name}">分类1</td>
+            <td>
+                <a href="#" th:href="@{/admin/edit/{id}/input(id=${item.id})}" class="ui mini teal basic button">编辑</a>
+                <a href="#" th:href="@{/admin/delete/{id}(id=${item.id})}" class="ui mini teal basic negative button">删除</a>
+
+            </td>
+        </tr>
+
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="3">
+                <div class="ui mini pagination menu ">
+                    <a href="#" th:href="@{/admin/getPage/{pagePre}/{limit}(pagePre=${pageInfo.prePage},limit=${limit})}" class="item" th:if="${!pageInfo.isFirstPage}">上一页</a>
+                    <a href="#" th:href="@{/admin/getPage/{pageNext}/{limit}(pageNext=${pageInfo.nextPage},limit=${limit})}" class="item" th:if="${!pageInfo.isLastPage}">下一页</a>
+                </div>
+                <a href="#" th:href="@{/admin/toSave}" class="ui mini right floated teal basic button">新增</a>
+            </th>
+        </tr>
+
+        </tfoot>
+
+    </table>
+
+
+</div>
+<!--footer-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="ui inverted vertical segment m-padded-tb-massive m-position-bottom-none " th:replace="admin/_fragments::footer">
+    <div class="ui container">
+        <div class="ui inverted center aligned divided grid stackable">
+            <div class="three wide column">
+                <img src="/images/WechatIMG1.jpeg" class="ui rounded image" alt="" style="width: 100px"
+                     th:src="@{/images/WechatIMG1.jpeg}">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class=" item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header  m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item ">Email:conquermeee@icloud.com</a>
+                    <a href="#" class="item ">QQ: 534814599</a>
+
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header ">About</h4>
+                <p class="m-opacity-mini m-text-lined m-text-spaced ">这是我的个人博客,会分享关于编程的技术思考,希望能给来到这里的你带来帮助</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p align="center" class="m-text-spaced m-opacity-mini">Copyright © 2019-2020 Zhaogaopeng Designed by FKZM</p>
+</footer>
+
+
+<script src="js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script src="js/semantic.min.js" th:src="@{/js/semantic.min.js}"></script>
+<script>
+    $("#hide-show-btn").click(function () {
+        /*切换显示隐藏*/
+        $(".m-item").toggleClass("m-mobile-hide");
+    });
+    $(".ui.dropdown").dropdown({
+        on: "hover"
+    })
+    ;
+
+</script>
+</body>
+</html>
